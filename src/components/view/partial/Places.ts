@@ -10,9 +10,7 @@ import {
  * Отображение мест в зале и их выбор
  */
 export class PlacesView extends View<IPlacesData, IPlacesSettings> {
-	// Список выбранных мест
 	protected _selected: Set<string> = new Set();
-	// Список элементов для всех мест в зале
 	protected _seats: Record<string, HTMLButtonElement> = {};
 
 	init() {

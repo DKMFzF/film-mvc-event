@@ -11,9 +11,7 @@ import {
  * Отображение сеансов для выбранного фильма и их выбора
  */
 export class ScheduleView extends View<IScheduleData, IScheduleSettings> {
-	// Список сеансов
 	protected _selected: TScheduleSession | null = null;
-	// Список элементов для всех сеансов
 	protected _times: Record<string, HTMLElement> = {};
 
 	init() {

@@ -20,6 +20,9 @@ import {
 	TTicketDescription,
 } from '@/types/components/model/AppState';
 
+/**
+ * Глобальный стейт приложения и методы работыс ним
+ */
 export class AppStateModel implements IAppState {
 	private _selectedMovie: string | null = null;
 	private _selectedSession: string | null = null;
@@ -270,7 +273,6 @@ export class AppStateModel implements IAppState {
 		return `${movie.title}, ${movie.day} ${movie.time}`;
 	}
 
-	// Маппинг
 	formatTicketDescription(ticket: TBasketTicket): TTicketDescription {
 		return {
 			id: ticket.id,

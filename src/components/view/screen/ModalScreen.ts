@@ -10,31 +10,35 @@ import { IModalScreenSettings } from '@/types/components/view/screen/ModalScreen
 
 /**
  * Общая логика и структура модальных окон
+ * Header - данные для заголовка
+ * Main - внутренние данные для контента модального окна
+ * C - внешние данные для экрана
+ * S extends IModalScreenSettings - настройки экрана
  */
 export abstract class ModalScreen<
-	Header, // данные для заголовка
-	Main, // внутренние данные для контента модального окна
-	C, // внешние данные для экрана
-	S extends IModalScreenSettings // настройки экрана (обработчики событий
+	Header,
+	Main,
+	C, 
+	S extends IModalScreenSettings
 > extends Screen<C, S> {
-	// модальное окно
-	protected declare modal: ModalView<Header, Main>;
-	// кнопка "Далее"
-	protected declare nextButton: HTMLButtonElement;
 
-	// Абстрактные методы для реализации в дочерних классах
+	protected declare modal: ModalView<Header, Main>;
+	protected declare nextButton: HTMLButtonElement;
 
 	abstract initHeader(): IView<Header>;
 
 	abstract initContent(): IView<Main>;
 
-	// Переопределенный init() для инициализации модального окна
 	protected init() {
-		this.nextButton = this.getNextButton(SETTINGS.basketModal, this.settings.onNext);
+		this.nextButton = this.getNextButton(
+			SETTINGS.basketModal, 
+			this.settings.onNext
+		);
 
-		this.modal = this.getModalView({ headerView: this.initHeader(), contentView: this.initContent() }, this.settings.onClose);
-
-		// console.log(this.modal);
+		this.modal = this.getModalView({ 
+			headerView: this.initHeader(), 
+			contentView: this.initContent() 
+		}, this.settings.onClose);
 
 		this.element = this.modal.element;
 		console.log(this.element)

@@ -28,13 +28,11 @@ export class AppStateEmitter extends EventEmitter {
 	protected onModelChange(changed: AppStateChanges) {
 		if (changed === AppStateChanges.modal) {
 
-			// первое событие с изменением модалки
 			this.emit(changed, {
 				previous: this.previousModal,
 				current: this.model.openedModal,
 			});
 
-			// второе событие с открытием модалки
 			this.emit(this.model.openedModal, {});
 		} else {
 			this.emit(changed, {});

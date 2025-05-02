@@ -6,15 +6,11 @@ import { IModalData, IModalSettings } from '@/types/components/view/common/Modal
  * Отображение модального окна
  */
 export class ModalView<H, C> extends View<IModalData<H, C>, IModalSettings<H, C>> {
-	// модальное окно, которое сейчас открыто, оно всегда одно
 	protected static _openedModal: ModalView<unknown, unknown> | null;
 
 	protected init() {
-		// слушаем клик по иконке закрыть
 		this.ensure(this.settings.close).addEventListener('click', this.onCloseHandler.bind(this));
-		// клик по оверлею тоже закрывает модальное окно
 		this.element.addEventListener('click', this.onCloseHandler.bind(this));
-		// добавляем в подвал кнопки из настроек
 		this.ensure(this.settings.footer).prepend(...this.settings.actions);
 	}
 
@@ -33,7 +29,6 @@ export class ModalView<H, C> extends View<IModalData<H, C>, IModalSettings<H, C>
 			this.settings.onClose?.();
 		}
 		if (ModalView._openedModal === this) {
-			// если закрывается текущее модальное окно, то обнуляем статическое поле
 			ModalView._openedModal = null;
 		}
 	}
@@ -48,7 +43,6 @@ export class ModalView<H, C> extends View<IModalData<H, C>, IModalSettings<H, C>
 		this.settings.onOpen?.();
 	}
 
-	// Проброс данных во вложенные отображения
 	set header(data: H | undefined) {
 		console.log(`ModalView -> set header(${data})`);
 		if (data) {
@@ -70,7 +64,6 @@ export class ModalView<H, C> extends View<IModalData<H, C>, IModalSettings<H, C>
 		);
 	}
 
-	// Установка сообщения в модальное окно
 	set message(value: string | undefined) {
 		if (value) {
 			this.setValue(this.settings.message, value);
@@ -87,7 +80,6 @@ export class ModalView<H, C> extends View<IModalData<H, C>, IModalSettings<H, C>
 		);
 	}
 
-	// Открытие и закрытие модального окна
 	set isActive(state: boolean) {
 		if (state) {
 			this.element.classList.add(this.settings.activeClass);

@@ -13,13 +13,12 @@ export class PageView extends View<IPageData, IPageSettings> {
 		this.settings.onClick({ event });
 	}
 
-	// Метод для установки значения счетчика товаров в корзине
+	// счетчика товаров в корзине
 	set counter(value: number) {
 		this.setValue(this.settings.counter, String(value));
 	}
 
 	// Метод для блокировки/разблокировки прокрутки страницы
-	// при открытии модального окна
 	set isLocked(value: boolean) {
 		this.ensure(this.settings.wrapper).classList.toggle(
 			this.settings.lockedClass,

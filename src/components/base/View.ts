@@ -13,19 +13,16 @@ import {
 import { isChildElement, isPlainObject, isSelector } from '@/utils';
 import { IView } from '@/types/components/base/View';
 
-// Базовое отображение
+/**
+ * Базовое отображение для вьюшек
+ */
 export abstract class View<T, S extends object> implements IView<T, S> {
-	// чтобы при копировании создавать дочерний класс, не зная его имени
+	// при копировании создавать дочерний класс, не зная его имени
 	['constructor']!: new (root: HTMLElement, settings: S) => this;
 	// кеш чтобы не пересоздавать и не искать повторно элементы
 	protected cache: Record<string, HTMLElement> = {};
 
-	// конструктор с элементом и настройками,
-	// в простейшем виде без проверок и дефолтных значений
 	constructor(public element: HTMLElement, protected readonly settings: S) {
-		// чтобы не переопределять конструктор, для компактности и соблюдения интерфейса
-		// можно реализовать так называемые методы жизненного цикла класса,
-		// которые вызываются в нужный момент и могут быть легко переопределены.
 		this.init();
 		if (!this.element) {
 			throw new Error('Element is not defined');
@@ -33,8 +30,7 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 	}
 
 	// копирующий конструктор, чтобы настроить один раз
-	// и дальше использовать копии отображения везде,
-	// но при желании можем что-то поменять, например обработчики событий
+	// и дальше использовать копии отображения везде
 	copy(settings?: S) {
 		return new this.constructor(
 			this.element.cloneNode(true) as HTMLElement,
@@ -42,9 +38,8 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 		);
 	}
 
-	// методы жизненного цикла
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	protected init() {}
+	protected init() {} // метод жизненного цикла
 
 	// рендер, вызывается когда надо обновить отображение с данными
 	render(data: Partial<T>): HTMLElement {
@@ -78,7 +73,7 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 		el.replaceWith(value);
 	}
 
-	// дальше идут полезные методы которые упрощают дизнь вьюшки
+	// полезные методы которые упрощают дизнь вьюшки
 	
 	protected ensureTemplate(query: string) {
 		const el = this.ensure(query);
