@@ -1,12 +1,10 @@
-import { isBoolean, isPlainObject, isSelector } from '.'; // yes
+import { isBoolean, isPlainObject, isSelector } from '.';
 import {
 	ElementChild,
 	ElementProps,
 	SelectorCollection,
 	SelectorElement,
 } from '@/types/html';
-
-// Хлперы для упрощения жизни компонентов
 
 export function ensureElement<T extends HTMLElement>(
 	selectorElement: SelectorElement<T>,
