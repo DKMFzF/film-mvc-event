@@ -1,8 +1,5 @@
 import { EnumApiMethods, ErrorState } from '@/types/components/base/Api';
 
-/**
- * Базовый класс для работы с API
- */
 export class Api {
 	readonly baseUrl: string;
 	protected _options: RequestInit;

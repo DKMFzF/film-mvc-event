@@ -1,12 +1,12 @@
 import { IClickable } from '../../base/View';
 import { IView } from '../../base/View';
 
-export interface HeroData<T> {
+export interface IHeroData<T> {
 	cover: string;
 	content: T;
 }
 
-export interface HeroSettings<T> extends IClickable<T> {
+export interface IHeroSettings<T> extends IClickable<T> {
 	action: string;
 	background: string;
 	content: string;

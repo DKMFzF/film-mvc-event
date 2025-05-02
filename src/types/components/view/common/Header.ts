@@ -1,12 +1,12 @@
 import { IClickable } from '../../base/View';
 
-export interface HeaderData {
+export interface IHeaderData {
 	title: string;
 	description: string;
 	action?: string;
 }
 
-export interface HeaderSettings extends IClickable<never> {
+export interface IHeaderSettings extends IClickable<never> {
 	action: string;
 	title: string;
 	description: string;

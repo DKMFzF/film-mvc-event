@@ -1,18 +1,18 @@
-import { CardData } from '../partial/Card';
-import { FilmData } from '../partial/Film';
+import { ICardData } from '../partial/Card';
+import { IFilmData } from '../partial/Film';
 
-export interface FilmItem extends FilmData {
+export interface IFilmItem extends IFilmData {
 	id: string;
 	cover: string;
 }
 
-export interface MainData {
+export interface IMainData {
 	counter: number;
-	items: CardData[];
-	selected: FilmItem;
+	items: ICardData[];
+	selected: IFilmItem;
 }
 
-export interface MainSettings {
+export interface IMainSettings {
 	onOpenBasket: () => void;
 	onSelectFilm: (id: string) => void;
 	onOpenFilm: (id: string) => void;

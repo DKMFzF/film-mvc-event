@@ -19,7 +19,7 @@ import { OrderController } from '@/components/controller/Order';
 import { OrderFormScreen } from '@/components/view/screen/OrderForm';
 import { BasketController } from '@/components/controller/Basket';
 import { BasketScreen } from '@/components/view/screen/Basket';
-import { ModalChange } from '@/types/components/model/AppStateEmitter';
+import { TModalChange } from '@/types/components/model/AppStateEmitter';
 
 const api = new FilmAPI(CDN_URL, API_URL);
 const app = new AppStateEmitter(api, SETTINGS.appState, AppStateModel);
@@ -48,7 +48,7 @@ app.on(AppStateChanges.selectedMovie, () => {
 	main.selected = app.model.selectedMovie;
 });
 
-app.on(AppStateChanges.modal, ({ previous, current }: ModalChange) => {
+app.on(AppStateChanges.modal, ({ previous, current }: TModalChange) => {
 	main.page.isLocked = current !== AppStateModals.none;
 	if (previous !== AppStateModals.none) {
 		modal[previous].render({ isActive: false });

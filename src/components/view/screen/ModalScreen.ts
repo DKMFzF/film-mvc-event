@@ -1,12 +1,12 @@
 import { Screen } from '@/components/base/Screen';
 import { cloneTemplate } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
-import { ElementCreator } from '@/types/html';
+import { TElementCreator } from '@/types/html';
 
 import { ModalView } from '@/components/view/common/Modal';
 import { ButtonView } from '@/components/view/common/Button';
 import { IView } from '@/types/components/base/View';
-import { ModalScreenSettings } from '@/types/components/view/screen/ModalScreen';
+import { IModalScreenSettings } from '@/types/components/view/screen/ModalScreen';
 
 /**
  * Общая логика и структура модальных окон
@@ -15,7 +15,7 @@ export abstract class ModalScreen<
 	Header, // данные для заголовка
 	Main, // внутренние данные для контента модального окна
 	C, // внешние данные для экрана
-	S extends ModalScreenSettings // настройки экрана (обработчики событий
+	S extends IModalScreenSettings // настройки экрана (обработчики событий
 > extends Screen<C, S> {
 	// модальное окно
 	protected declare modal: ModalView<Header, Main>;
@@ -45,7 +45,7 @@ export abstract class ModalScreen<
 	protected getNextButton(
 		settings: { 
 			nextLabel: string; 
-			nextSettings: ElementCreator 
+			nextSettings: TElementCreator 
 		},
 		onClick: () => void
 	) {

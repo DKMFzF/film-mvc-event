@@ -1,17 +1,17 @@
 import { View } from '../../base/View';
-import { IClickableEvent } from '@/types/components/base/View';
-import { ElementCreator } from '@/types/html';
+import { TClickableEvent } from '@/types/components/base/View';
+import { TElementCreator } from '@/types/html';
 import { createElement } from '@/utils/html';
 
 import {
-	ButtonData,
-	ButtonSettings,
+	IButtonData,
+	IButtonSettings,
 } from '@/types/components/view/common/Button';
 
 /**
  * Отображение типовой кнопки
  */
-export class ButtonView<T> extends View<ButtonData, ButtonSettings<T>> {
+export class ButtonView<T> extends View<IButtonData, IButtonSettings<T>> {
 	init() {
 		this.element.addEventListener('click', this.onClickHandler.bind(this));
 	}
@@ -33,8 +33,8 @@ export class ButtonView<T> extends View<ButtonData, ButtonSettings<T>> {
 	 */
 	static make<T extends HTMLElement>(
 		label: string,
-		settings: ElementCreator,
-		onClick: (args: IClickableEvent<never>) => void
+		settings: TElementCreator,
+		onClick: (args: TClickableEvent<never>) => void
 	): T {
 		const el = new ButtonView(createElement(...settings), { onClick });
 		return el.render({ label }) as T;

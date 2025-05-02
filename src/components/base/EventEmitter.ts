@@ -1,14 +1,14 @@
-import { EventHandler, EventsMap } from '@/types/components/base/EventEmitter';
+import { TEventHandler, TEventsMap } from '@/types/components/base/EventEmitter';
 
 export class EventEmitter {
-	protected events: EventsMap;
+	protected events: TEventsMap;
 
 	constructor() {
 		this.events = new Map();
 	}
 
 	// подписка
-	on(eventName: string, handler: EventHandler) {
+	on(eventName: string, handler: TEventHandler) {
 		if (!this.events.has(eventName)) {
 			this.events.set(eventName, new Set());
 		}
@@ -16,7 +16,7 @@ export class EventEmitter {
 	}
 
 	// отписка
-	off(eventName: string, handler: EventHandler) {
+	off(eventName: string, handler: TEventHandler) {
 		if (this.events.has(eventName)) {
 			this.events.get(eventName).delete(handler);
 		}
@@ -34,7 +34,7 @@ export class EventEmitter {
 		this.events.clear();
 	}
 
-	bindEmitter(events: EventsMap) {
+	bindEmitter(events: TEventsMap) {
 		this.events = events;
 	}
 }

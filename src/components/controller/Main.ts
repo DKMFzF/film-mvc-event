@@ -1,7 +1,7 @@
-import { AppState, AppStateModals } from '@/types/components/model/AppState';
+import { IAppState, AppStateModals } from '@/types/components/model/AppState';
 import { Controller } from '@/components/base/Controller';
 
-export class MainController extends Controller<AppState> {
+export class MainController extends Controller<IAppState> {
 	onOpenBasket = () => {
 		this.model.openModal(AppStateModals.basket);
 	};

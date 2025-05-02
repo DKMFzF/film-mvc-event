@@ -1,6 +1,6 @@
 import { IView } from '../../base/View';
 
-export interface ModalData<H, C> {
+export interface IModalData<H, C> {
 	header?: H;
 	content: C;
 	message?: string;
@@ -8,7 +8,7 @@ export interface ModalData<H, C> {
 	isError?: boolean;
 }
 
-export interface ModalSettings<H, C> {
+export interface IModalSettings<H, C> {
 	close: string;
 	header: string;
 	content: string;

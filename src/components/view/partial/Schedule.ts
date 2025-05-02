@@ -1,18 +1,18 @@
 import { View } from '../../base/View';
 import {
-	DaySchedule,
-	HallSessions,
-	ScheduleData,
-	ScheduleSession,
-	ScheduleSettings,
+	TDaySchedule,
+	THallSessions,
+	IScheduleData,
+	TScheduleSession,
+	IScheduleSettings,
 } from '@/types/components/view/partial/Schedule';
 
 /**
  * Отображение сеансов для выбранного фильма и их выбора
  */
-export class ScheduleView extends View<ScheduleData, ScheduleSettings> {
+export class ScheduleView extends View<IScheduleData, IScheduleSettings> {
 	// Список сеансов
-	protected _selected: ScheduleSession | null = null;
+	protected _selected: TScheduleSession | null = null;
 	// Список элементов для всех сеансов
 	protected _times: Record<string, HTMLElement> = {};
 
@@ -35,7 +35,7 @@ export class ScheduleView extends View<ScheduleData, ScheduleSettings> {
 		return [day, time].join(':');
 	}
 
-	protected _createTimes(day: string, times: DaySchedule): HTMLElement[] {
+	protected _createTimes(day: string, times: TDaySchedule): HTMLElement[] {
 		return Object.keys(times).map((time) => {
 			const timeElement = this.create(this.settings.time, {
 				textContent: time,
@@ -46,7 +46,7 @@ export class ScheduleView extends View<ScheduleData, ScheduleSettings> {
 		});
 	}
 
-	protected _createDays(data: HallSessions): HTMLElement[] {
+	protected _createDays(data: THallSessions): HTMLElement[] {
 		return Object.keys(data).map((day) =>
 			this.create(this.settings.day, {}, [
 				this.create(this.settings.label, {
@@ -57,12 +57,12 @@ export class ScheduleView extends View<ScheduleData, ScheduleSettings> {
 		);
 	}
 
-	set sessions(value: ScheduleSession[]) {
+	set sessions(value: TScheduleSession[]) {
 		this._times = {};
 		this.setValue(this.element, this._createDays(ScheduleView.group(value)));
 	}
 
-	set selected(item: ScheduleSession) {
+	set selected(item: TScheduleSession) {
 		Object.values(this._times).forEach((timeElement) =>
 			timeElement.classList.remove(this.settings.activeClass)
 		);
@@ -76,14 +76,14 @@ export class ScheduleView extends View<ScheduleData, ScheduleSettings> {
 		}
 	}
 
-	render(data: ScheduleData) {
+	render(data: IScheduleData) {
 		this.sessions = data.sessions;
 		this.selected = data.selected;
 		return this.element;
 	}
 
-	static group(data: ScheduleSession[]) {
-		return data.reduce<HallSessions>((a, c) => {
+	static group(data: TScheduleSession[]) {
+		return data.reduce<THallSessions>((a, c) => {
 			if (!a[c.day]) a[c.day] = {};
 			a[c.day][c.time] = c;
 			return a;

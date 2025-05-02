@@ -1,4 +1,4 @@
-export interface ModalScreenSettings {
+export interface IModalScreenSettings {
 	onClose: () => void;
 	onNext: () => void;
 }

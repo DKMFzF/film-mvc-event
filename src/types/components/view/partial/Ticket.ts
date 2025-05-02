@@ -1,13 +1,13 @@
 import { IClickable } from '../../base/View';
 
-export interface TicketData {
+export interface ITicketData {
 	id: string;
 	place: string;
 	session: string;
 	price: string;
 }
 
-export interface TicketSettings extends IClickable<TicketData> {
+export interface ITicketSettings extends IClickable<ITicketData> {
 	place: string;
 	session: string;
 	price: string;

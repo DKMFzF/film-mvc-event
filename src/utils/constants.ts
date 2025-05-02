@@ -1,11 +1,11 @@
-import { Settings } from '@/types/settings';
+import { ISettings } from '@/types/settings';
 
 export const API_URL = `${process.env.API_ORIGIN}/api/afisha`;
 export const CDN_URL = `${process.env.API_ORIGIN}/content/afisha`;
 
 export const DEVELOPMENT = process.env.NODE_ENV === 'development';
 
-export const SETTINGS: Settings = {
+export const SETTINGS: ISettings = {
 	gallerySelector: '.gallery',
 	gallerySettings: {
 		activeItemClass: 'gallery__item_active',

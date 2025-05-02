@@ -1,10 +1,10 @@
 import { View } from '../../base/View';
-import { PageData, PageSettings } from '@/types/components/view/partial/Page';
+import { IPageData, IPageSettings } from '@/types/components/view/partial/Page';
 
 /**
  * Глобальный layout страницы
  */
-export class PageView extends View<PageData, PageSettings> {
+export class PageView extends View<IPageData, IPageSettings> {
 	init() {
 		this.ensure(this.settings.basket).addEventListener('click', this.onClickHandler.bind(this));
 	}

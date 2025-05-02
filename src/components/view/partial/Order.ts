@@ -1,13 +1,13 @@
 import { View } from '../../base/View';
 import {
-	OrderData,
-	OrderSettings,
+	IOrderData,
+	IOrderSettings,
 } from '@/types/components/view/partial/Order';
 
 /**
  * Форма заказа
  */
-export class OrderView extends View<OrderData, OrderSettings> {
+export class OrderView extends View<IOrderData, IOrderSettings> {
 	init() {
 		this.element.addEventListener('submit', this.onSubmitHandler.bind(this));
 		this.element.addEventListener('change', this.onSubmitHandler.bind(this));

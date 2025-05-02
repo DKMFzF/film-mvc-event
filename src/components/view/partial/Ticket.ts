@@ -1,14 +1,14 @@
 import { View } from '../../base/View';
 import {
-	TicketData,
-	TicketSettings,
+	ITicketData,
+	ITicketSettings,
 } from '@/types/components/view/partial/Ticket';
 
 /**
  * Отображение билета в корзине
  */
-export class TicketView extends View<TicketData, TicketSettings> {
-	protected _item!: TicketData;
+export class TicketView extends View<ITicketData, ITicketSettings> {
+	protected _item!: ITicketData;
 
 	init() {
 		this.ensure(this.settings.delete).addEventListener(
@@ -33,7 +33,7 @@ export class TicketView extends View<TicketData, TicketSettings> {
 		this.setValue(this.settings.price, value);
 	}
 
-	render(data: TicketData) {
+	render(data: ITicketData) {
 		this._item = data;
 		return super.render(data);
 	}

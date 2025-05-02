@@ -1,6 +1,6 @@
-import { ElementCreator } from '@/types/html';
+import { TElementCreator } from '@/types/html';
 
-export interface ViewSettings {
+export interface IViewSettings {
     gallerySelector: string;
     gallerySettings: {
         activeItemClass: string;
@@ -8,7 +8,7 @@ export interface ViewSettings {
     };
 }
 
-export interface CardSettings {
+export interface ICardSettings {
     cardSettings: {
         text: string;
         image: string;
@@ -16,7 +16,7 @@ export interface CardSettings {
     cardTemplate: string;
 }
 
-export interface FilmSettings {
+export interface IFilmSettings {
     filmTemplate: string;
     filmSettings: {
         rating: string;
@@ -29,7 +29,7 @@ export interface FilmSettings {
     };
 }
 
-export interface HeroSettings {
+export interface IHeroSettings {
     heroSelector: string;
     heroSettings: {
         action: string;
@@ -38,7 +38,7 @@ export interface HeroSettings {
     };
 }
 
-export interface PageSettings {
+export interface IPageSettings {
     pageSelector: string;
     pageSettings: {
         wrapper: string;
@@ -48,23 +48,23 @@ export interface PageSettings {
     };
 }
 
-export interface ScheduleSettings {
-    scheduleElement: ElementCreator;
+export interface IScheduleSettings {
+    scheduleElement: TElementCreator;
     scheduleSettings: {
-        day: ElementCreator;
-        label: ElementCreator;
-        time: ElementCreator;
+        day: TElementCreator;
+        label: TElementCreator;
+        time: TElementCreator;
         activeClass: string;
     };
 }
 
-export interface PlacesSettings {
-    placesElement: ElementCreator;
+export interface IPlacesSettings {
+    placesElement: TElementCreator;
     placesSettings: {
-        seat: ElementCreator;
-        seatsContainer: ElementCreator;
-        label: ElementCreator;
-        rowContainer: ElementCreator;
+        seat: TElementCreator;
+        seatsContainer: TElementCreator;
+        label: TElementCreator;
+        rowContainer: TElementCreator;
         rowLabel: string;
         rowSeparator: string;
         takenSeparator: string;
@@ -72,7 +72,7 @@ export interface PlacesSettings {
     };
 }
 
-export interface TicketSettings {
+export interface ITicketSettings {
     ticketTemplate: string;
     ticketSettings: {
         place: string;
@@ -82,7 +82,7 @@ export interface TicketSettings {
     };
 }
 
-export interface HeaderSettings {
+export interface IHeaderSettings {
     headerTemplate: string;
     headerSettings: {
         action: string;
@@ -91,7 +91,7 @@ export interface HeaderSettings {
     };
 }
 
-export interface BasketSettings {
+export interface IBasketSettings {
     basketTemplate: string;
     basketSettings: {
         activeItemClass: string;
@@ -99,7 +99,7 @@ export interface BasketSettings {
     };
 }
 
-export interface OrderSettings {
+export interface IOrderSettings {
     orderTemplate: string;
     orderSettings: {
         email: string;
@@ -107,7 +107,7 @@ export interface OrderSettings {
     };
 }
 
-export interface MessageSettings {
+export interface IMessageSettings {
     messageTemplate: string;
     messageSettings: {
         title: string;
@@ -116,7 +116,7 @@ export interface MessageSettings {
     };
 }
 
-export interface ModalSettings {
+export interface IModalSettings {
     modalTemplate: string;
     modalSettings: {
         close: string;
@@ -129,40 +129,40 @@ export interface ModalSettings {
     };
 }
 
-export interface ScheduleModalSettings {
+export interface IScheduleModalSettings {
     scheduleModal: {
         nextLabel: string;
-        nextSettings: ElementCreator;
+        nextSettings: TElementCreator;
     };
 }
 
-export interface PlacesModalSettings {
+export interface IPlacesModalSettings {
     placesModal: {
         headerTitle: string;
         nextLabel: string;
-        nextSettings: ElementCreator;
+        nextSettings: TElementCreator;
     };
 }
 
-export interface BasketModalSettings {
+export interface IBasketModalSettings {
     basketModal: {
         headerTitle: string;
         nextLabel: string;
-        nextSettings: ElementCreator;
+        nextSettings: TElementCreator;
         totalLabel: string;
     };
 }
 
-export interface OrderModalSettings {
+export interface IOrderModalSettings {
     orderModal: {
         headerTitle: string;
         nextLabel: string;
         totalLabel: string;
-        nextSettings: ElementCreator;
+        nextSettings: TElementCreator;
     };
 }
 
-export interface SuccessModalSettings {
+export interface ISuccessModalSettings {
     successModal: {
         title: string;
         description: string;
@@ -170,15 +170,15 @@ export interface SuccessModalSettings {
     };
 }
 
-export interface AppStateSettings {
+export interface IAppStateSettings {
     appState: {
         formatCurrency: (value: number) => string;
         storageKey: string;
     };
 }
 
-export interface Settings extends ViewSettings, CardSettings, FilmSettings, HeroSettings, 
-    PageSettings, ScheduleSettings, PlacesSettings, TicketSettings, HeaderSettings, 
-    BasketSettings, OrderSettings, MessageSettings, ModalSettings, ScheduleModalSettings, 
-    PlacesModalSettings, BasketModalSettings, OrderModalSettings, SuccessModalSettings, 
-    AppStateSettings {}
+export interface ISettings extends IViewSettings, ICardSettings, IFilmSettings, IHeroSettings, 
+    IPageSettings, IScheduleSettings, IPlacesSettings, ITicketSettings, IHeaderSettings, 
+    IBasketSettings, IOrderSettings, IMessageSettings, IModalSettings, IScheduleModalSettings, 
+    IPlacesModalSettings, IBasketModalSettings, IOrderModalSettings, ISuccessModalSettings, 
+    IAppStateSettings {}

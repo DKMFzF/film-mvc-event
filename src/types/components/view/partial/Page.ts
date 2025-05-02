@@ -1,11 +1,11 @@
 import { IClickable } from '../../base/View';
 
-export interface PageData {
+export interface IPageData {
 	counter: number;
 	isLocked: boolean;
 }
 
-export interface PageSettings extends IClickable<never> {
+export interface IPageSettings extends IClickable<never> {
 	wrapper: string;
 	counter: string;
 	basket: string;

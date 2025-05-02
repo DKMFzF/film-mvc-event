@@ -1,11 +1,11 @@
 import { View } from '../../base/View';
 
-import { HeroData, HeroSettings } from '@/types/components/view/common/Hero';
+import { IHeroData, IHeroSettings } from '@/types/components/view/common/Hero';
 
 /**
  * Контейнер для контента с фоновым изображением и кнопкой
  */
-export class HeroView<T> extends View<HeroData<T>, HeroSettings<T>> {
+export class HeroView<T> extends View<IHeroData<T>, IHeroSettings<T>> {
 	protected declare _contentElement: HTMLElement;
 	protected declare _item: T;
 

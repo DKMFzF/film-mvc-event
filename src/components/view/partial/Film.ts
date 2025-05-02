@@ -1,10 +1,10 @@
 import { View } from '../../base/View';
-import { FilmData, FilmSettings } from '@/types/components/view/partial/Film';
+import { IFilmData, IFilmSettings } from '@/types/components/view/partial/Film';
 
 /**
  * Подробное описание фильма
  */
-export class FilmView extends View<FilmData, FilmSettings> {
+export class FilmView extends View<IFilmData, IFilmSettings> {
 	init() {
 		this.isCompact = this.settings.isCompact;
 	}

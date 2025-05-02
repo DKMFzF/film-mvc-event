@@ -1,9 +1,9 @@
-export type ApiListResponse<Type> = {
+export type TApiListResponse<Type> = {
 	total: number;
 	items: Type[];
 };
 
-export interface Movie {
+export interface IMovie {
 	id: string;
 	rating: number;
 	director: string;
@@ -15,7 +15,7 @@ export interface Movie {
 	cover: string;
 }
 
-export interface Session {
+export interface ISession {
 	id: string;
 	film: string;
 	daytime: string;
@@ -28,7 +28,7 @@ export interface Session {
 	taken: string[];
 }
 
-export interface Ticket {
+export interface ITicket {
 	film: string;
 	session: string;
 	daytime: string;
@@ -40,23 +40,23 @@ export interface Ticket {
 }
 
 // Создание тела для запроса в API
-export interface Contacts {
+export interface IContacts {
 	email: string;
 	phone: string;
 }
 
-export interface Order extends Contacts {
-	tickets: Ticket[];
+export interface Order extends IContacts {
+	tickets: ITicket[];
 }
 
 // Что получим с API
-export interface OrderResult extends Ticket {
+export interface OrderResult extends ITicket {
 	id: string;
 }
 
 // Методы работы с API
 export interface IFilmAPI {
-	getFilms: () => Promise<Movie[]>;
-	getFilmSchedule: (id: string) => Promise<Session[]>;
+	getFilms: () => Promise<IMovie[]>;
+	getFilmSchedule: (id: string) => Promise<ISession[]>;
 	orderTickets: (order: Order) => Promise<OrderResult[]>;
 }

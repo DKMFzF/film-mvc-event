@@ -1,7 +1,7 @@
 import { Controller } from '@/components/base/Controller';
-import { AppState, AppStateModals } from '@/types/components/model/AppState';
+import { IAppState, AppStateModals } from '@/types/components/model/AppState';
 
-export class BasketController extends Controller<AppState> {
+export class BasketController extends Controller<IAppState> {
 	onRemove = (id: string) => {
 		this.model.removeTicket(id);
 	};

@@ -1,14 +1,14 @@
 import { View } from '../../base/View';
 
 import {
-	HeaderData,
-	HeaderSettings,
+	IHeaderData,
+	IHeaderSettings,
 } from '@/types/components/view/common/Header';
 
 /**
  * Шапка с заголовком, описанием и каким-то действием, например, кнопкой "назад".
  */
-export class HeaderView extends View<HeaderData, HeaderSettings> {
+export class HeaderView extends View<IHeaderData, IHeaderSettings> {
 	init() {
 		this.ensure(this.settings.action).addEventListener(
 			'click',

@@ -1,4 +1,4 @@
-export interface FilmData {
+export interface IFilmData {
 	rating: number;
 	director: string;
 	tags: string[];
@@ -6,7 +6,7 @@ export interface FilmData {
 	description: string;
 }
 
-export interface FilmSettings {
+export interface IFilmSettings {
 	rating: string;
 	director: string;
 	tags: string;
