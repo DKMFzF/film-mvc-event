@@ -1,0 +1,71 @@
+/* stylelint-disable */
+
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:list';
+
+@function str-replace($string, $search, $replace: '') {
+	@if $string == '' or $search == '' {
+		@return $string;
+	}
+	$index: string.index($string, $search);
+
+	@if $index {
+		@return string.slice($string, 1, $index - 1) + $replace +
+			str-replace(
+				string.slice($string, $index + string.length($search)),
+				$search,
+				$replace
+			);
+	}
+
+	@return $string;
+}
+
+@function maybe-quote($string) {
+	@if string.index($string, ' ') {
+		@return string.quote($string);
+	}
+	@return $string;
+}
+
+@mixin font-face(
+	$name,
+	$path,
+	$weight: null,
+	$style: null,
+	$exts: woff2 woff,
+	$display: swap
+) {
+	$src: ();
+	$extmods: (
+		eot: '?',
+		svg: '#' + str-replace($name, ' ', '_')
+	);
+	$formats: (
+		otf: 'opentype',
+		ttf: 'truetype'
+	);
+
+	@each $ext in $exts {
+		$extmod: if(
+			map.has-key($extmods, $ext),
+			$ext + map.get($extmods, $ext),
+			$ext
+		);
+		$format: if(map.has-key($formats, $ext), map.get($formats, $ext), $ext);
+		$src: list.append(
+			$src,
+			url($path + '.' + $extmod) format(string.quote($format)),
+			comma
+		);
+	}
+
+	@font-face {
+		font-display: $display;
+		font-family: maybe-quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
