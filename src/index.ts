@@ -119,7 +119,6 @@ app.on(AppStateChanges.basket, () => {
 });
 
 app.on(AppStateModals.basket, () => {
-	console.log('INDEX: реакция на событие открытие basket');
 	modal[AppStateModals.basket].render({
 		header: {
 			title: SETTINGS.basketModal.headerTitle,
