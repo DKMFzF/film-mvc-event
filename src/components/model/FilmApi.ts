@@ -5,9 +5,9 @@ dayjs.locale('ru-ru');
 
 import { Api } from '../base/Api';
 import type {
-	ApiListResponse,
-	Movie,
-	Session,
+	TApiListResponse,
+	IMovie,
+	ISession,
 	Order,
 	OrderResult,
 	IFilmAPI,
@@ -28,8 +28,8 @@ export class FilmAPI extends Api implements IFilmAPI {
 	 * Получить список сеансов фильма
 	 * @param id
 	 */
-	async getFilmSchedule(id: string): Promise<Session[]> {
-		const data = await this._get<ApiListResponse<Session>>(
+	async getFilmSchedule(id: string): Promise<ISession[]> {
+		const data = await this._get<TApiListResponse<ISession>>(
 			`/films/${id}/schedule`
 		);
 		return data.items.map((schedule) => {
@@ -46,8 +46,8 @@ export class FilmAPI extends Api implements IFilmAPI {
 	/**
 	 * Получить список фильмов
 	 */
-	async getFilms(): Promise<Movie[]> {
-		const data = await this._get<ApiListResponse<Movie>>('/films');
+	async getFilms(): Promise<IMovie[]> {
+		const data = await this._get<TApiListResponse<IMovie>>('/films');
 		return data.items.map((item) => ({
 			...item,
 			image: this.cdn + item.image,
@@ -63,7 +63,7 @@ export class FilmAPI extends Api implements IFilmAPI {
 	 * @param order.phone - телефон пользователя
 	 */
 	async orderTickets(order: Order): Promise<OrderResult[]> {
-		const data = await this._post<ApiListResponse<OrderResult>>(
+		const data = await this._post<TApiListResponse<OrderResult>>(
 			'/order',
 			order
 		);

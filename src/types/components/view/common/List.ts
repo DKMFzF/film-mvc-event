@@ -1,16 +1,16 @@
 import { IView } from '../../base/View';
 
-export type ElementsMap = Record<string, HTMLElement>;
+export type TElementsMap = Record<string, HTMLElement>;
 
-export interface ItemData {
+export interface IItemData {
 	id: string;
 }
 
-export interface ListData<T> {
+export interface IListData<T> {
 	items: T[];
 }
 
-export interface ListSettings<T> {
+export interface IListSettings<T> {
 	item: IView<T, unknown>;
 	activeItemClass: string;
 	itemClass: string;

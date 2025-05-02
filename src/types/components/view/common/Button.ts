@@ -1,7 +1,7 @@
 import { IClickable } from '../../base/View';
 
-export interface ButtonData {
+export interface IButtonData {
 	label: string;
 }
 
-export interface ButtonSettings<T> extends IClickable<T> {}
+export interface IButtonSettings<T> extends IClickable<T> {}

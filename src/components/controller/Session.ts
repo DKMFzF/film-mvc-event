@@ -1,7 +1,7 @@
 import { Controller } from '@/components/base/Controller';
-import { AppState, AppStateModals } from '@/types/components/model/AppState';
+import { IAppState, AppStateModals } from '@/types/components/model/AppState';
 
-export class SessionController extends Controller<AppState> {
+export class SessionController extends Controller<IAppState> {
 	onSelect = (id: string) => {
 		this.model.selectSession(id);
 	};

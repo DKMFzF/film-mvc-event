@@ -1,15 +1,15 @@
 import { View } from '../../base/View';
 import {
-	HallSize,
-	PlacesData,
-	PlacesSettings,
-	SelectedPlace,
+	THallSize,
+	IPlacesData,
+	IPlacesSettings,
+	TSelectedPlace,
 } from '@/types/components/view/partial/Places';
 
 /**
  * Отображение мест в зале и их выбор
  */
-export class PlacesView extends View<PlacesData, PlacesSettings> {
+export class PlacesView extends View<IPlacesData, IPlacesSettings> {
 	// Список выбранных мест
 	protected _selected: Set<string> = new Set();
 	// Список элементов для всех мест в зале
@@ -70,7 +70,7 @@ export class PlacesView extends View<PlacesData, PlacesSettings> {
 
 	// Методы для управления отображением мест в зале
 
-	set hall({ rows, seats }: HallSize) {
+	set hall({ rows, seats }: THallSize) {
 		this.setValue(
 			this.element,
 			Array(rows)
@@ -86,7 +86,7 @@ export class PlacesView extends View<PlacesData, PlacesSettings> {
 		takenSeats.forEach((key) => (this._seats[key].disabled = true));
 	}
 
-	set selected(seats: SelectedPlace[]) {
+	set selected(seats: TSelectedPlace[]) {
 		this._selected = new Set(seats.map((place) => this._getSeatKey(place.row, place.seat)));
 		Object.values(this._seats).forEach((seatElement) =>
 			seatElement.classList.remove(this.settings.activeClass)
@@ -106,7 +106,7 @@ export class PlacesView extends View<PlacesData, PlacesSettings> {
 		});
 	}
 
-	render(data: PlacesData) {
+	render(data: IPlacesData) {
 		// в этой реализации компонента важен порядок установки поэтому переопределяем метод
 		if (data.hall) this.hall = data.hall;
 		if (data.taken) this.taken = data.taken;

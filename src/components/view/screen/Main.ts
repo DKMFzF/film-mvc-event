@@ -1,26 +1,26 @@
 import { Screen } from '@/components/base/Screen';
-import { IClickableEvent } from '@/types/components/base/View';
+import { TClickableEvent } from '@/types/components/base/View';
 import { cloneTemplate, ensureElement } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
 
 import {
-	FilmItem,
-	MainData,
-	MainSettings,
+	IFilmItem,
+	IMainData,
+	IMainSettings,
 } from '@/types/components/view/screen/Main';
 import { ListView } from '../common/List';
 import { CardView } from '../partial/Card';
 import { HeroView } from '../common/Hero';
 import { FilmView } from '../partial/Film';
 import { PageView } from '../partial/Page';
-import { CardData } from '@/types/components/view/partial/Card';
+import { ICardData } from '@/types/components/view/partial/Card';
 
 /**
  * Экран главной страницы
  */
-export class MainScreen extends Screen<MainData, MainSettings> {
-	protected declare gallery: ListView<CardData>;
-	protected declare hero: HeroView<FilmItem>;
+export class MainScreen extends Screen<IMainData, IMainSettings> {
+	protected declare gallery: ListView<ICardData>;
+	protected declare hero: HeroView<IFilmItem>;
 	public declare page: PageView;
 
 	protected init() {
@@ -29,7 +29,7 @@ export class MainScreen extends Screen<MainData, MainSettings> {
 			onClick: this.settings.onOpenBasket,
 		});
 
-		this.gallery = new ListView<CardData>(ensureElement(SETTINGS.gallerySelector), {
+		this.gallery = new ListView<ICardData>(ensureElement(SETTINGS.gallerySelector), {
 				...SETTINGS.gallerySettings,
 				item: new CardView(cloneTemplate(SETTINGS.cardTemplate), {
 					...SETTINGS.cardSettings,
@@ -39,7 +39,7 @@ export class MainScreen extends Screen<MainData, MainSettings> {
 		);
 
 
-		this.hero = new HeroView<FilmItem>(ensureElement(SETTINGS.heroSelector), {
+		this.hero = new HeroView<IFilmItem>(ensureElement(SETTINGS.heroSelector), {
 			...SETTINGS.heroSettings,
 			contentView: new FilmView(cloneTemplate(SETTINGS.filmTemplate), {
 				...SETTINGS.filmSettings,
@@ -51,11 +51,11 @@ export class MainScreen extends Screen<MainData, MainSettings> {
 		this.element = this.page.element;
 	}
 
-	protected onSelectFilmHandler({ item }: IClickableEvent<string>) {
+	protected onSelectFilmHandler({ item }: TClickableEvent<string>) {
 		this.settings.onSelectFilm(item);
 	}
 
-	protected onOpenFilmHandler({ item }: IClickableEvent<FilmItem>) {
+	protected onOpenFilmHandler({ item }: TClickableEvent<IFilmItem>) {
 		this.settings.onOpenFilm(item.id);
 	}
 
@@ -63,12 +63,11 @@ export class MainScreen extends Screen<MainData, MainSettings> {
 		this.page.counter = value;
 	}
 
-	set items(value: CardData[]) {
-		// console.log(value);
+	set items(value: ICardData[]) {
 		this.gallery.items = value;
 	}
 
-	set selected(value: FilmItem) {
+	set selected(value: IFilmItem) {
 		this.hero.content = value;
 		this.hero.cover = value.cover;
 		this.gallery.setActiveItem(value.id);

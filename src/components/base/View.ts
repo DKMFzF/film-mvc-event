@@ -1,8 +1,8 @@
 import {
-	ElementChild,
-	ElementProps,
-	ElementValue,
-	SelectorElement,
+	TElementChild,
+	TElementProps,
+	TElementValue,
+	TSelectorElement,
 } from '@/types/html';
 import {
 	createElement,
@@ -55,7 +55,7 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 	}
 
 	protected ensure<T extends HTMLElement>(
-		query?: SelectorElement<T>,
+		query?: TSelectorElement<T>,
 		root: HTMLElement = this.element
 	): T {
 		if (!isSelector(query)) {
@@ -71,7 +71,7 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 	// замена элемента на другой или его обновлённую версию
 	// с проверкой существования обоих
 	protected setElement<T extends HTMLElement>(
-		query: SelectorElement<T>,
+		query: TSelectorElement<T>,
 		value: HTMLElement
 	) {
 		const el = this.ensure(query);
@@ -88,10 +88,10 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 
 	protected create<T extends HTMLElement>(
 		settings:
-			| [keyof HTMLElementTagNameMap, ElementProps<T>]
+			| [keyof HTMLElementTagNameMap, TElementProps<T>]
 			| keyof HTMLElementTagNameMap,
-		props?: ElementProps<T>,
-		children?: ElementChild
+		props?: TElementProps<T>,
+		children?: TElementChild
 	): T {
 		if (typeof settings === 'string')
 			return createElement<T>(settings, props, children);
@@ -108,7 +108,7 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 	}
 
 	setVisibility<T extends HTMLElement>(
-		query: SelectorElement<T>,
+		query: TSelectorElement<T>,
 		isVisible: boolean
 	) {
 		const el = this.ensure(query);
@@ -117,14 +117,14 @@ export abstract class View<T, S extends object> implements IView<T, S> {
 	}
 
 	protected setValue<T extends HTMLElement>(
-		query: SelectorElement<T>,
-		value: ElementValue<T>
+		query: TSelectorElement<T>,
+		value: TElementValue<T>
 	) {
 		const el = query instanceof HTMLElement ? query : this.ensure(query);
 		if (typeof value === 'string') el.textContent = value;
 		else if (isChildElement(value)) setElementChildren(el, value);
 		else if (isPlainObject(value)) {
-			setElementProps<T>(el, value as ElementProps<T>);
+			setElementProps<T>(el, value as TElementProps<T>);
 		} else {
 			throw new Error('Unknown value type');
 		}

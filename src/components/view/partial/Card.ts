@@ -1,10 +1,10 @@
 import { View } from '../../base/View';
-import { CardData, CardSettings } from '@/types/components/view/partial/Card';
+import { ICardData, ICardSettings } from '@/types/components/view/partial/Card';
 
 /**
  * Маленькая карточка фильма для списка
  */
-export class CardView extends View<CardData, CardSettings> {
+export class CardView extends View<ICardData, ICardSettings> {
 	id: string;
 
 	init() {

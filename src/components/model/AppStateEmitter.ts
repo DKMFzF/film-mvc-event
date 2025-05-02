@@ -1,21 +1,21 @@
 import { EventEmitter } from '@/components/base/EventEmitter';
 import { IFilmAPI } from '@/types/components/model/FilmApi';
 import {
-	AppState,
+	IAppState,
 	AppStateChanges,
-	AppStateConstructor,
+	IAppStateConstructor,
 	AppStateModals,
-	AppStateSettings,
+	IAppStateSettings,
 } from '@/types/components/model/AppState';
 
 export class AppStateEmitter extends EventEmitter {
-	public model: AppState;
+	public model: IAppState;
 	protected previousModal: AppStateModals = AppStateModals.none;
 
 	constructor(
 		api: IFilmAPI,
-		settings: Omit<AppStateSettings, 'onChange'>,
-		Model: AppStateConstructor
+		settings: Omit<IAppStateSettings, 'onChange'>,
+		Model: IAppStateConstructor
 	) {
 		super();
 

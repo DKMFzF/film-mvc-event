@@ -1,27 +1,27 @@
-import { ElementCreator } from '@/types/html';
+import { TElementCreator } from '@/types/html';
 import { ISelectable } from '../../base/View';
 
-export type SelectedPlace = {
+export type TSelectedPlace = {
 	row: number;
 	seat: number;
 };
 
-export type HallSize = {
+export type THallSize = {
 	rows: number;
 	seats: number;
 };
 
-export interface PlacesData {
-	hall: HallSize;
+export interface IPlacesData {
+	hall: THallSize;
 	taken: string[];
-	selected: SelectedPlace[];
+	selected: TSelectedPlace[];
 }
 
-export interface PlacesSettings extends ISelectable<SelectedPlace[]> {
-	seat: ElementCreator;
-	seatsContainer: ElementCreator;
-	label: ElementCreator;
-	rowContainer: ElementCreator;
+export interface IPlacesSettings extends ISelectable<TSelectedPlace[]> {
+	seat: TElementCreator;
+	seatsContainer: TElementCreator;
+	label: TElementCreator;
+	rowContainer: TElementCreator;
 	rowLabel: string;
 	rowSeparator: string;
 	takenSeparator: string;

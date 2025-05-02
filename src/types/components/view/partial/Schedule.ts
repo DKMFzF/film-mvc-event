@@ -1,28 +1,28 @@
-import { ElementCreator } from '@/types/html';
+import { TElementCreator } from '@/types/html';
 import { ISelectable } from '../../base/View';
 
-export type ScheduleSession = {
+export type TScheduleSession = {
 	id: string;
 	day: string;
 	time: string;
 };
 
-export type DaySchedule = {
-	[key: string]: ScheduleSession;
+export type TDaySchedule = {
+	[key: string]: TScheduleSession;
 };
 
-export type HallSessions = {
-	[key: string]: DaySchedule;
+export type THallSessions = {
+	[key: string]: TDaySchedule;
 };
 
-export interface ScheduleData {
-	sessions: ScheduleSession[];
-	selected: ScheduleSession | null;
+export interface IScheduleData {
+	sessions: TScheduleSession[];
+	selected: TScheduleSession | null;
 }
 
-export interface ScheduleSettings extends ISelectable<ScheduleSession> {
-	time: ElementCreator;
-	label: ElementCreator;
-	day: ElementCreator;
+export interface IScheduleSettings extends ISelectable<TScheduleSession> {
+	time: TElementCreator;
+	label: TElementCreator;
+	day: TElementCreator;
 	activeClass: string;
 }

@@ -3,13 +3,13 @@ import { cloneTemplate, createElement } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
 
 import {
-	SelectPlacesData,
-	SelectPlacesSettings,
+	ISelectPlacesData,
+	ISelectPlacesSettings,
 } from '@/types/components/view/screen/SelectPlaces';
-import { HeaderData } from '@/types/components/view/common/Header';
+import { IHeaderData } from '@/types/components/view/common/Header';
 import {
-	PlacesData,
-	SelectedPlace,
+	IPlacesData,
+	TSelectedPlace,
 } from '@/types/components/view/partial/Places';
 import { HeaderView } from '@/components/view/common/Header';
 import { PlacesView } from '@/components/view/partial/Places';
@@ -19,10 +19,10 @@ import { ISelectableEvent } from '@/types/components/base/View';
  * Экран выбора мест
  */
 export class SelectPlacesScreen extends ModalScreen<
-	HeaderData,
-	Partial<PlacesData>,
-	SelectPlacesData,
-	SelectPlacesSettings
+	IHeaderData,
+	Partial<IPlacesData>,
+	ISelectPlacesData,
+	ISelectPlacesSettings
 > {
 	initHeader() {
 		return new HeaderView(cloneTemplate(SETTINGS.headerTemplate), {
@@ -38,11 +38,11 @@ export class SelectPlacesScreen extends ModalScreen<
 		});
 	}
 
-	protected onSelect({ value }: ISelectableEvent<SelectedPlace[]>) {
+	protected onSelect({ value }: ISelectableEvent<TSelectedPlace[]>) {
 		this.settings.onSelect(value);
 	}
 
-	set places(value: Partial<PlacesData>) {
+	set places(value: Partial<IPlacesData>) {
 		this.modal.content = value;
 	}
 }

@@ -1,27 +1,27 @@
 import { ModalScreen } from '@/components/view/screen/ModalScreen';
-import { IClickableEvent } from '@/types/components/base/View';
+import { TClickableEvent } from '@/types/components/base/View';
 import { cloneTemplate } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
 
 import {
-	BasketData,
-	BasketSettings,
+	IBasketData,
+	IBasketSettings,
 } from '@/types/components/view/screen/Basket';
-import { HeaderData } from '@/types/components/view/common/Header';
+import { IHeaderData } from '@/types/components/view/common/Header';
 import { ListView } from '@/components/view/common/List';
-import { TicketData } from '@/types/components/view/partial/Ticket';
+import { ITicketData } from '@/types/components/view/partial/Ticket';
 import { HeaderView } from '@/components/view/common/Header';
 import { TicketView } from '@/components/view/partial/Ticket';
-import { ListData } from '@/types/components/view/common/List';
+import { IListData } from '@/types/components/view/common/List';
 
 /**
  * Экран корзины
  */
 export class BasketScreen extends ModalScreen<
-	HeaderData,
-	ListData<TicketData>,
-	BasketData,
-	BasketSettings
+	IHeaderData,
+	IListData<ITicketData>,
+	IBasketData,
+	IBasketSettings
 > {
 	initHeader() {
 		return new HeaderView(cloneTemplate(SETTINGS.headerTemplate), {
@@ -32,7 +32,7 @@ export class BasketScreen extends ModalScreen<
 
 	initContent() {
 		console.log(`BasketScreen -> initContent()`);
-		return new ListView<TicketData>(cloneTemplate(SETTINGS.basketTemplate), {
+		return new ListView<ITicketData>(cloneTemplate(SETTINGS.basketTemplate), {
 			...SETTINGS.basketSettings,
 			item: new TicketView(cloneTemplate(SETTINGS.ticketTemplate), {
 				...SETTINGS.ticketSettings,
@@ -41,11 +41,11 @@ export class BasketScreen extends ModalScreen<
 		});
 	}
 
-	protected onRemoveTicket({ item }: IClickableEvent<TicketData>) {
+	protected onRemoveTicket({ item }: TClickableEvent<ITicketData>) {
 		this.settings.onRemove(item.id);
 	}
 
-	set tickets(tickets: TicketData[]) {
+	set tickets(tickets: ITicketData[]) {
 		this.modal.content = { items: tickets, };
 		this.nextButton.disabled = !tickets.length;
 	}

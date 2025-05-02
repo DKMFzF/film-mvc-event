@@ -1,9 +1,9 @@
 import { Controller } from '@/components/base/Controller';
-import { AppState, AppStateModals } from '@/types/components/model/AppState';
-import { OrderData } from '@/types/components/view/partial/Order';
+import { IAppState, AppStateModals } from '@/types/components/model/AppState';
+import { IOrderData } from '@/types/components/view/partial/Order';
 
-export class OrderController extends Controller<AppState> {
-	onChange = (value: OrderData) => {
+export class OrderController extends Controller<IAppState> {
+	onChange = (value: IOrderData) => {
 		this.model.fillContacts(value);
 	};
 	onNext = async () => {

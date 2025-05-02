@@ -1,10 +1,10 @@
-import { HeaderData } from '@/types/components/view/common/Header';
+import { IHeaderData } from '@/types/components/view/common/Header';
 
-export interface SuccessData {
-	content: HeaderData;
+export interface ISuccessData {
+	content: IHeaderData;
 	isActive: boolean;
 }
 
-export interface SuccessSettings {
+export interface ISuccessSettings {
 	onClose: () => void;
 }

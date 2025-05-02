@@ -1,15 +1,15 @@
 import {
-	Contacts,
+	IContacts,
 	IFilmAPI,
-	Movie,
+	IMovie,
 	Order,
 	OrderResult,
-	Session,
-	Ticket,
+	ISession,
+	ITicket,
 } from './FilmApi';
 
 // Такие данные нам нужны, чтобы сформировать временный уникальный ключ билета
-export type TicketData = {
+export type TTicketData = {
 	film: string;
 	session: string;
 	row: number;
@@ -17,7 +17,7 @@ export type TicketData = {
 };
 
 // Полное описание билета, которое будет храниться в корзине и в localStorage
-export type BasketTicket = TicketData & {
+export type TBasketTicket = TTicketData & {
 	id: string;
 	title: string;
 	daytime: string;
@@ -27,7 +27,7 @@ export type BasketTicket = TicketData & {
 };
 
 // Форматированные данные билета для отображения в корзине
-export type TicketDescription = {
+export type TTicketDescription = {
 	id: string;
 	place: string;
 	session: string;
@@ -35,14 +35,14 @@ export type TicketDescription = {
 };
 
 // Краткое описание фильма для отображения в модальных окнах
-export type MovieDescription = {
+export type TMovieDescription = {
 	title: string;
 	day: string;
 	time: string;
 };
 
 // Место в зале
-export type HallPlace = {
+export type THallPlace = {
 	row: number;
 	seat: number;
 };
@@ -70,24 +70,24 @@ export enum AppStateChanges {
 }
 
 // Состояние приложения, которое мы будем хранить в localStorage
-export type PersistedState = {
-	tickets: BasketTicket[];
-	contacts: Contacts;
+export type TPersistedState = {
+	tickets: TBasketTicket[];
+	contacts: IContacts;
 };
 
 // Модель данных приложения
-export interface AppState {
+export interface IAppState {
 	// Загружаемые с сервера данные
-	movies: Map<string, Movie>;
-	movieSessions: Map<string, Session>;
+	movies: Map<string, IMovie>;
+	movieSessions: Map<string, ISession>;
 
 	// Заполняемые пользователем данные
-	selectedMovie: Movie | null;
-	selectedSession: Session | null;
-	basket: Map<string, BasketTicket>;
+	selectedMovie: IMovie | null;
+	selectedSession: ISession | null;
+	basket: Map<string, TBasketTicket>;
 	basketTotal: number;
-	contacts: Contacts;
-	tickets: Ticket[];
+	contacts: IContacts;
+	tickets: ITicket[];
 	order: Order;
 
 	// Состояние интерфейса
@@ -108,15 +108,15 @@ export interface AppState {
 	// Пользовательские действия
 	selectMovie(id: string): void;
 	selectSession(id: string): void;
-	selectPlaces(selected: HallPlace[]): void;
+	selectPlaces(selected: THallPlace[]): void;
 	removeTicket(id: string): void;
-	fillContacts(contacts: Partial<Contacts>): void;
+	fillContacts(contacts: Partial<IContacts>): void;
 	isValidContacts(): boolean;
 
 	// Вспомогательные методы
-	getBasketMovie(): MovieDescription | null;
-	formatMovieDescription(movie: MovieDescription): string;
-	formatTicketDescription(ticket: BasketTicket): TicketDescription;
+	getBasketMovie(): TMovieDescription | null;
+	formatMovieDescription(movie: TMovieDescription): string;
+	formatTicketDescription(ticket: TBasketTicket): TTicketDescription;
 	formatCurrency(value: number): string;
 
 	// Методы для работы с модальными окнами
@@ -125,7 +125,7 @@ export interface AppState {
 }
 
 // Настройки модели данных
-export interface AppStateSettings {
+export interface IAppStateSettings {
 	formatCurrency: (value: number) => string;
 	storageKey: string;
 	// Функция, которая будет вызываться при изменении состояния
@@ -133,6 +133,6 @@ export interface AppStateSettings {
 }
 
 // Конструктор модели данных
-export interface AppStateConstructor {
-	new (api: IFilmAPI, settings: AppStateSettings): AppState;
+export interface IAppStateConstructor {
+	new (api: IFilmAPI, settings: IAppStateSettings): IAppState;
 }

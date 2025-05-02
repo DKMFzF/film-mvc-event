@@ -1,18 +1,18 @@
 import { View } from '../../base/View';
 
 import {
-	ElementsMap,
-	ItemData,
-	ListData,
-	ListSettings,
+	TElementsMap,
+	IItemData,
+	IListData,
+	IListSettings,
 } from '@/types/components/view/common/List';
 
 /**
  * Класс для отображения списка элементов
  */
-export class ListView<T extends ItemData> extends View<ListData<T>, ListSettings<T>> {
+export class ListView<T extends IItemData> extends View<IListData<T>, IListSettings<T>> {
 	// Сохраняем элементы в объекте, где ключ - id элемента
-	protected _elements: ElementsMap;
+	protected _elements: TElementsMap;
 
 	/**
 	 * Устанавливаем активный элемент
@@ -40,7 +40,7 @@ export class ListView<T extends ItemData> extends View<ListData<T>, ListSettings
 	 * Обновляем отображение списка элементов
 	 */
 	set items(items: T[]) {
-		this._elements = items.reduce<ElementsMap>((result, item) => {
+		this._elements = items.reduce<TElementsMap>((result, item) => {
 			// Копируем заранее настроенное отображение
 			const el = this.settings.item.copy();
 			

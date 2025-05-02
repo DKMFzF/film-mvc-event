@@ -1,33 +1,33 @@
 import {
-	Contacts,
+	IContacts,
 	IFilmAPI,
-	Movie,
+	IMovie,
 	Order,
 	OrderResult,
-	Session,
-	Ticket,
+	ISession,
+	ITicket,
 } from '@/types/components/model/FilmApi';
 import {
-	AppState,
+	IAppState,
 	AppStateChanges,
 	AppStateModals,
-	AppStateSettings,
-	BasketTicket,
-	HallPlace,
-	MovieDescription,
-	PersistedState,
-	TicketData,
-	TicketDescription,
+	IAppStateSettings,
+	TBasketTicket,
+	THallPlace,
+	TMovieDescription,
+	TPersistedState,
+	TTicketData,
+	TTicketDescription,
 } from '@/types/components/model/AppState';
 
-export class AppStateModel implements AppState {
+export class AppStateModel implements IAppState {
 	private _selectedMovie: string | null = null;
 	private _selectedSession: string | null = null;
-	basket: Map<string, BasketTicket> = new Map<string, BasketTicket>();
+	basket: Map<string, TBasketTicket> = new Map<string, TBasketTicket>();
 
-	movies: Map<string, Movie> = new Map<string, Movie>();
-	movieSessions: Map<string, Session> = new Map<string, Session>();
-	contacts: Contacts = {
+	movies: Map<string, IMovie> = new Map<string, IMovie>();
+	movieSessions: Map<string, ISession> = new Map<string, ISession>();
+	contacts: IContacts = {
 		email: '',
 		phone: '',
 	};
@@ -36,7 +36,7 @@ export class AppStateModel implements AppState {
 	modalMessage: string | null = null;
 	isError = false;
 
-	constructor(protected api: IFilmAPI, protected settings: AppStateSettings) {}
+	constructor(protected api: IFilmAPI, protected settings: IAppStateSettings) {}
 
 	get basketTotal(): number {
 		return Array.from(this.basket.values()).reduce<number>(
@@ -51,20 +51,20 @@ export class AppStateModel implements AppState {
 		);
 	}
 
-	get selectedMovie(): Movie | null {
+	get selectedMovie(): IMovie | null {
 		return this._selectedMovie && this.movies.has(this._selectedMovie)
 			? this.movies.get(this._selectedMovie)
 			: null;
 	}
 
-	get selectedSession(): Session | null {
+	get selectedSession(): ISession | null {
 		return this._selectedSession &&
 			this.movieSessions.has(this._selectedSession)
 			? this.movieSessions.get(this._selectedSession)
 			: null;
 	}
 
-	get tickets(): Ticket[] {
+	get tickets(): ITicket[] {
 		return Array.from(this.basket.values()).map((ticket) => {
 			return {
 				film: ticket.film,
@@ -156,14 +156,14 @@ export class AppStateModel implements AppState {
 		}
 	}
 
-	selectPlaces(selected: HallPlace[]): void {
+	selectPlaces(selected: THallPlace[]): void {
 		if (!this.selectedSession) {
 			throw new Error(`No selected session`);
 		}
 		const session = this.selectedSession;
 		const movie = this.movies.get(session.film);
 		const price = session.price;
-		const nextTickets: BasketTicket[] = [];
+		const nextTickets: TBasketTicket[] = [];
 		for (const place of selected) {
 			const id = this.formatTicketKey({
 				film: this.selectedSession.film,
@@ -203,7 +203,7 @@ export class AppStateModel implements AppState {
 		this.notifyChanged(AppStateChanges.basket);
 	}
 
-	fillContacts(contacts: Partial<Contacts>): void {
+	fillContacts(contacts: Partial<IContacts>): void {
 		this.contacts = {
 			...this.contacts,
 			...contacts,
@@ -254,7 +254,7 @@ export class AppStateModel implements AppState {
 	}
 
 	// helpers
-	getBasketMovie(): MovieDescription | null {
+	getBasketMovie(): TMovieDescription | null {
 		if (this.basket.size === 0) {
 			return null;
 		}
@@ -266,12 +266,12 @@ export class AppStateModel implements AppState {
 		};
 	}
 
-	formatMovieDescription(movie: MovieDescription): string {
+	formatMovieDescription(movie: TMovieDescription): string {
 		return `${movie.title}, ${movie.day} ${movie.time}`;
 	}
 
 	// Маппинг
-	formatTicketDescription(ticket: BasketTicket): TicketDescription {
+	formatTicketDescription(ticket: TBasketTicket): TTicketDescription {
 		return {
 			id: ticket.id,
 			session: `${ticket.day} ${ticket.time}`,
@@ -292,7 +292,7 @@ export class AppStateModel implements AppState {
 		try {
 			const state = localStorage.getItem(this.settings.storageKey);
 			if (!state) return;
-			const { tickets, contacts } = JSON.parse(state) as PersistedState;
+			const { tickets, contacts } = JSON.parse(state) as TPersistedState;
 			this.contacts = contacts;
 			this.basket.clear();
 			for (const ticket of tickets) {
@@ -306,7 +306,7 @@ export class AppStateModel implements AppState {
 	}
 
 	persistState(): void {
-		const state: PersistedState = {
+		const state: TPersistedState = {
 			contacts: this.contacts,
 			tickets: Array.from(this.basket.values()),
 		};
@@ -319,11 +319,11 @@ export class AppStateModel implements AppState {
 		this.settings.onChange(changed);
 	}
 
-	protected formatTicketKey(selected: TicketData): string {
+	protected formatTicketKey(selected: TTicketData): string {
 		return `${selected.film}:${selected.session}:${selected.row}:${selected.seat}`;
 	}
 
-	protected validateContacts(contacts: Partial<Contacts>): string | null {
+	protected validateContacts(contacts: Partial<IContacts>): string | null {
 		const errors: string[] = [];
 		if (!contacts.email || !contacts.phone) {
 			errors.push('Email и телефон обязательные поля');

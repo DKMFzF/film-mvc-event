@@ -1,13 +1,13 @@
 import { isBoolean, isPlainObject, isSelector } from '.';
 import {
-	ElementChild,
-	ElementProps,
-	SelectorCollection,
-	SelectorElement,
+	TElementChild,
+	TElementProps,
+	TSelectorCollection,
+	TSelectorElement,
 } from '@/types/html';
 
 export function ensureElement<T extends HTMLElement>(
-	selectorElement: SelectorElement<T>,
+	selectorElement: TSelectorElement<T>,
 	context?: HTMLElement
 ): T {
 	if (isSelector(selectorElement)) {
@@ -27,7 +27,7 @@ export function ensureElement<T extends HTMLElement>(
 }
 
 export function ensureAllElements<T extends HTMLElement>(
-	selectorElement: SelectorCollection<T>,
+	selectorElement: TSelectorCollection<T>,
 	context: HTMLElement = document as unknown as HTMLElement
 ): T[] {
 	if (isSelector(selectorElement)) {
@@ -52,8 +52,8 @@ export function cloneTemplate<T extends HTMLElement>(
 
 export function createElement<T extends HTMLElement>(
 	tagName: keyof HTMLElementTagNameMap,
-	props?: ElementProps<T>,
-	children?: ElementChild
+	props?: TElementProps<T>,
+	children?: TElementChild
 ): T {
 	const element = document.createElement(tagName) as T;
 	if (props) {
@@ -65,13 +65,13 @@ export function createElement<T extends HTMLElement>(
 	return element;
 }
 
-export function setElementChildren(root: HTMLElement, children: ElementChild) {
+export function setElementChildren(root: HTMLElement, children: TElementChild) {
 	root.replaceChildren(...(Array.isArray(children) ? children : [children]));
 }
 
 export function setElementProps<T extends HTMLElement>(
 	element: HTMLElement,
-	props: ElementProps<T>
+	props: TElementProps<T>
 ) {
 	for (const key in props) {
 		const value = props[key];

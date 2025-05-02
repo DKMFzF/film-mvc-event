@@ -3,21 +3,21 @@ import { cloneTemplate } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
 
 import {
-	SuccessData,
-	SuccessSettings,
+	ISuccessData,
+	ISuccessSettings,
 } from '@/types/components/view/screen/Success';
 import { ModalView } from '@/components/view/common/Modal';
 import { HeaderView } from '@/components/view/common/Header';
-import { HeaderData } from '@/types/components/view/common/Header';
+import { IHeaderData } from '@/types/components/view/common/Header';
 
 /**
  * Экран подтверждения успешного бронирования
  */
-export class SuccessScreen extends Screen<SuccessData, SuccessSettings> {
-	protected declare modal: ModalView<never, HeaderData>;
+export class SuccessScreen extends Screen<ISuccessData, ISuccessSettings> {
+	protected declare modal: ModalView<never, IHeaderData>;
 
 	init() {
-		this.modal = new ModalView<never, HeaderData>(
+		this.modal = new ModalView<never, IHeaderData>(
 			cloneTemplate(SETTINGS.modalTemplate),
 			{
 				...SETTINGS.modalSettings,
@@ -34,7 +34,7 @@ export class SuccessScreen extends Screen<SuccessData, SuccessSettings> {
 		this.element = this.modal.element;
 	}
 
-	set content(value: HeaderData) {
+	set content(value: IHeaderData) {
 		this.modal.content = value;
 	}
 

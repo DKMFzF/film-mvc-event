@@ -3,23 +3,23 @@ import { cloneTemplate } from '@/utils/html';
 import { SETTINGS } from '@/utils/constants';
 
 import {
-	OrderFormData,
-	OrderFormSettings,
+	IOrderFormData,
+	IOrderFormSettings,
 } from '@/types/components/view/screen/OrderForm';
-import { HeaderData } from '@/types/components/view/common/Header';
-import { OrderData } from '@/types/components/view/partial/Order';
+import { IHeaderData } from '@/types/components/view/common/Header';
+import { IOrderData } from '@/types/components/view/partial/Order';
 import { HeaderView } from '@/components/view/common/Header';
 import { OrderView } from '@/components/view/partial/Order';
-import { IChangeableEvent } from '@/types/components/base/View';
+import { TChangeableEvent } from '@/types/components/base/View';
 
 /**
  * Экран формы заказа
  */
 export class OrderFormScreen extends ModalScreen<
-	HeaderData,
-	OrderData,
-	OrderFormData,
-	OrderFormSettings
+	IHeaderData,
+	IOrderData,
+	IOrderFormData,
+	IOrderFormSettings
 > {
 	initHeader() {
 		return new HeaderView(cloneTemplate(SETTINGS.headerTemplate), {
@@ -35,11 +35,11 @@ export class OrderFormScreen extends ModalScreen<
 		});
 	}
 
-	protected onFormChange({ value }: IChangeableEvent<OrderData>) {
+	protected onFormChange({ value }: TChangeableEvent<IOrderData>) {
 		this.settings.onChange(value);
 	}
 
-	set contacts(value: OrderData) {
+	set contacts(value: IOrderData) {
 		this.modal.content = value;
 	}
 

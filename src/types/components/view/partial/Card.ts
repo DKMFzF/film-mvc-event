@@ -1,12 +1,12 @@
 import { IClickable } from '../../base/View';
 
-export interface CardData {
+export interface ICardData {
 	id: string;
 	image: string;
 	title: string;
 }
 
-export interface CardSettings extends IClickable<string> {
+export interface ICardSettings extends IClickable<string> {
 	text: string;
 	image: string;
 }
